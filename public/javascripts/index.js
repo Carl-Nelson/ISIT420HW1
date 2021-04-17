@@ -144,7 +144,7 @@ $.get("/Trails", function(data, status){  // AJAX get
         var li = document.createElement('li');
         ul.appendChild(li);
 
-        li.innerHTML=li.innerHTML + index + ": " + " Name: " + item.name + "  " + item.location + ":  " + item.length + " Done? "+ item.completed + " Date Done" + item.dateCompleted;
+        li.innerHTML=li.innerHTML + index + ": " + " Name: " + item.name + "  " + item.location + ":  " + item.length + " Done? "+ item.completed + " Date Done: " + item.dateCompleted;
     }
 });
 }
