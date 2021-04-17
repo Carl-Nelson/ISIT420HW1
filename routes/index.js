@@ -82,7 +82,7 @@ router.delete('/DeleteTrail/:id', function (req, res) {
 router.put('/UpdateTrail/:id', function (req, res) {
   Trails.findOneAndUpdate(
     { _id: req.params.id },
-    { name: req.body.name, location: req.body.location, distance: req.body.distrance, completed: req.body.completed, dateCompleted: req.body.dateCompleted },
+    { name: req.body.name, location: req.body.location, length: req.body.length, completed: req.body.completed, dateCompleted: req.body.dateCompleted },
    { new: true },
     (err, trail) => {
       if (err) {

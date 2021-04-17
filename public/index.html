@@ -3,20 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>starter code</title>
+    <title>Carl and Darren's Amazing Trail Tracker</title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
 
 <body>
-<h2>V2 To Do's</h2>
+<h2>Trails</h2>
 <div class="grid-container">
    
 
 
 <div  class="grid-item">
-    <h3>Existing To Dos</h3>
+    <h3>Existing Trails</h3>
     <button type="button" id=get>Show Existing</button>
     <ul id="listUl"></ul>
 </div>
@@ -25,13 +25,13 @@
    
    
     <div  class="grid-item">
-        <h3>Add a new ToDo</h3>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="fname"><br><br>
-        <label for="detail">Detail:</label>
-        <input type="text" id="detail" name="fname"><br><br>
-        <label for="priority">Priority:</label>
-        <input type="text" id="priority" name="fname"><br><br>
+        <h3>Add a new Trail</h3>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="fname"><br><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="fname"><br><br>
+        <label for="length">Length:</label>
+        <input type="text" id="length" name="fname"><br><br>
         <button type="button" id=submit>SUBMIT</button>
        
     </div>
@@ -39,26 +39,27 @@
    
 
     <div  class="grid-item">
-        <h3>Delete ToDo by Title</h3>
+        <h3>Delete Trail by Name</h3>
         <div>
-            Enter Title here:  <input type="text" id="deleteTitle"><br><br>
+            Enter Name here:  <input type="text" id="deleteName"><br><br>
             <button type="button" id=delete>DELETE</button><br>
         </div>
     </div>
 
    
     <div  class="grid-item">
-        <h3>Edit one ToDo </h3>
+        <h3>Edit one Trail </h3>
         <div>
-            Enter Title here:  <input type="text" id="modTitle"><br><br>
+            Enter Name here:  <input type="text" id="modName"><br><br>
             <button type="button" id=find>FIND</button><br>
         </div>
         <div>
             <h3>Edit these fields</h3>
-        <input type="text" id="mtitle" ><br><br>
-        <input type="text" id="mdetail" ><br><br>
-        <input type="text" id="mpriority" ><br><br>
+        <input type="text" id="mname" ><br><br>
+        <input type="text" id="mlocation" ><br><br>
+        <input type="text" id="mlength" ><br><br>
         <input type="text" id="mcompleted" ><br><br>
+        <input type="text" id="mdatecompleted" ><br><br>
         <button type="button" id=msubmit>SUBMIT</button>
         </div>
    

@@ -16,16 +16,16 @@ const TrailsSchema = new Schema({
     type: String,
     required: true
   },
-  distance: {
-    type: Boolean,
-    required: int
+  length: {
+    type: Number,
+    required: true
   },
   completed: {
     type: Boolean,
     required: true
   },
   dateCompleted: {
-    type: Date,
+    type: String,
     required: true
   }
 });

@@ -1,9 +1,10 @@
 
-function ToDo(pTitle, pDetail, pPriority) {
-    this.title= pTitle;
-    this.detail = pDetail;
-    this.priority = pPriority;
-    this.completed = false;
+function Trail(pName, pLocation, pLength) {
+    this.name= pName;
+    this.location = pLocation;
+    this.length = pLength;
+    this.completed = pfalse;
+    this.dateCompleted = "";
   }
   var ClientNotes = [];  // our local copy of the cloud data
 
@@ -11,19 +12,19 @@ function ToDo(pTitle, pDetail, pPriority) {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("submit").addEventListener("click", function () {
-        var tTitle = document.getElementById("title").value;
-        var tDetail = document.getElementById("detail").value;
-        var tPriority = document.getElementById("priority").value;
-        var oneToDo = new ToDo(tTitle, tDetail, tPriority);
+        var tName = document.getElementById("name").value;
+        var tLocation = document.getElementById("location").value;
+        var tLength = document.getElementById("length").value;
+        var oneTrail = new Trail(tName, tLocation, tLength);
 
         $.ajax({
-            url: '/NewToDo' ,
+            url: '/NewTrail' ,
             method: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(oneToDo),
+            data: JSON.stringify(oneTrail),
             success: function (result) {
-                console.log("added new note")
+                console.log("added new trail")
             }
 
         });
@@ -37,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     document.getElementById("delete").addEventListener("click", function () {
         
-        var whichToDo = document.getElementById('deleteTitle').value;
+        var whichTrail = document.getElementById('deleteName').value;
         var idToDelete = "";
         for(i=0; i< ClientNotes.length; i++){
-            if(ClientNotes[i].title === whichToDo) {
+            if(ClientNotes[i].name === whichTrail) {
                 idToDelete = ClientNotes[i]._id;
            }
         }
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if(idToDelete != "")
         {
                      $.ajax({  
-                    url: 'DeleteToDo/'+ idToDelete,
+                    url: 'DeleteTrail/'+ idToDelete,
                     type: 'DELETE',  
                     contentType: 'application/json',  
                     success: function (response) {  
@@ -67,17 +68,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     document.getElementById("msubmit").addEventListener("click", function () {
-        var tTitle = document.getElementById("mtitle").value;
-        var tDetail = document.getElementById("mdetail").value;
-        var tPriority = document.getElementById("mpriority").value;
-        var oneToDo = new ToDo(tTitle, tDetail, tPriority);
-        oneToDo.completed =  document.getElementById("mcompleted").value;
+        var tName = document.getElementById("mname").value;
+        var tLocation = document.getElementById("mlocation").value;
+        var tLength = document.getElementById("mlength").value;
+        var oneTrail = new ToDo(tName, tLocation, tLength);
+        oneTrail.completed =  document.getElementById("mcompleted").value;
+        oneTrail.dateCompleted =  document.getElementById("mdatecompleted").value;
         
             $.ajax({
-                url: 'UpdateToDo/'+idToFind,
+                url: 'UpdateTrail/'+idToFind,
                 type: 'PUT',
                 contentType: 'application/json',
-                data: JSON.stringify(oneToDo),
+                data: JSON.stringify(oneTrail),
                     success: function (response) {  
                         console.log(response);  
                     },  
@@ -94,21 +96,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var idToFind = ""; // using the same value from the find operation for the modify
     // find one to modify
     document.getElementById("find").addEventListener("click", function () {
-        var tTitle = document.getElementById("modTitle").value;
+        var tName = document.getElementById("modName").value;
          idToFind = "";
         for(i=0; i< ClientNotes.length; i++){
-            if(ClientNotes[i].title === tTitle) {
+            if(ClientNotes[i].name === tName) {
                 idToFind = ClientNotes[i]._id;
            }
         }
         console.log(idToFind);
  
-        $.get("/FindToDo/"+ idToFind, function(data, status){ 
-            console.log(data[0].title);
-            document.getElementById("mtitle").value = data[0].title;
-            document.getElementById("mdetail").value= data[0].detail;
-            document.getElementById("mpriority").value = data[0].priority;
+        $.get("/FindTrail/"+ idToFind, function(data, status){ 
+            console.log(data[0].name);
+            document.getElementById("mname").value = data[0].name;
+            document.getElementById("mlocation").value= data[0].location;
+            document.getElementById("mlength").value = data[0].length;
             document.getElementById("mcompleted").value = data[0].completed;
+            document.getElementById("mdatecompleted").value = data[0].dateCompleted;
            
 
         });
@@ -126,19 +129,19 @@ ul.innerHTML = "";  // clears existing list so we don't duplicate old ones
 
 //var ul = document.createElement('ul')
 
-$.get("/ToDos", function(data, status){  // AJAX get
+$.get("/Trails", function(data, status){  // AJAX get
     ClientNotes = data;  // put the returned server json data into our local array
 
     // sort array by one property
     ClientNotes.sort(compare);  // see compare method below
     console.log(data);
     //listDiv.appendChild(ul);
-    ClientNotes.forEach(ProcessOneToDo); // build one li for each item in array
-    function ProcessOneToDo(item, index) {
+    ClientNotes.forEach(ProcessOneTrail); // build one li for each item in array
+    function ProcessOneTrail(item, index) {
         var li = document.createElement('li');
         ul.appendChild(li);
 
-        li.innerHTML=li.innerHTML + index + ": " + " Priority: " + item.priority + "  " + item.title + ":  " + item.detail + " Done? "+ item.completed;
+        li.innerHTML=li.innerHTML + index + ": " + " Name: " + item.name + "  " + item.location + ":  " + item.length + " Done? "+ item.completed + " Date Done" + item.dateCompleted;
     }
 });
 }
