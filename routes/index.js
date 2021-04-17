@@ -5,7 +5,7 @@ var router = express.Router();
 // .ADO.Net is a wrapper over raw SQL server interface
 const mongoose = require("mongoose");
 
-const ToDos = require("../ToDos");
+const Trails = require("../Trails");
 
 // edited to include my non-admin, user level account and PW on mongo atlas
 // and also to include the name of the mongo DB that the collection
@@ -37,71 +37,71 @@ router.get('/', function(req, res) {
   res.sendFile('index.html');
 });
 
-/* GET all ToDos */
-router.get('/ToDos', function(req, res) {
+/* GET all Trails */
+router.get('/Trails', function(req, res) {
   // find {  takes values, but leaving it blank gets all}
-  ToDos.find({}, (err, AllToDos) => {
+  Trails.find({}, (err, AllTrails) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    res.status(200).json(AllToDos);
+    res.status(200).json(AllTrails);
   });
 });
 
 
 
 
-/* post a new ToDo and push to Mongo */
-router.post('/NewToDo', function(req, res) {
+/* post a new Trail and push to Mongo */
+router.post('/NewTrail', function(req, res) {
 
-    let oneNewToDo = new ToDos(req.body);  // call constuctor in ToDos code that makes a new mongo ToDo object
+    let oneNewTrail = new Trails(req.body);  // call constuctor in Trails code that makes a new mongo Trail object
     console.log(req.body);
-    oneNewToDo.save((err, todo) => {
+    oneNewTrail.save((err, trail) => {
       if (err) {
         res.status(500).send(err);
       }
       else {
-      console.log(todo);
-      res.status(201).json(todo);
+      console.log(trail);
+      res.status(201).json(trail);
       }
     });
 });
 
 
-router.delete('/DeleteToDo/:id', function (req, res) {
-  ToDos.deleteOne({ _id: req.params.id }, (err, note) => { 
+router.delete('/DeleteTrail/:id', function (req, res) {
+  Trails.deleteOne({ _id: req.params.id }, (err, note) => { 
     if (err) {
       res.status(404).send(err);
     }
-    res.status(200).json({ message: "ToDo successfully deleted" });
+    res.status(200).json({ message: "Trail successfully deleted" });
   });
 });
 
 
-router.put('/UpdateToDo/:id', function (req, res) {
-  ToDos.findOneAndUpdate(
+router.put('/UpdateTrail/:id', function (req, res) {
+  Trails.findOneAndUpdate(
     { _id: req.params.id },
-    { title: req.body.title, detail: req.body.detail, priority: req.body.priority,   completed: req.body.completed },
+    { name: req.body.name, location: req.body.location, distance: req.body.distrance, completed: req.body.completed, dateCompleted: req.body.dateCompleted },
    { new: true },
-    (err, todo) => {
+    (err, trail) => {
       if (err) {
         res.status(500).send(err);
     }
-    res.status(200).json(todo);
+    res.status(200).json(trail);
     })
   });
 
 
-  /* GET one ToDos */
-router.get('/FindToDo/:id', function(req, res) {
+  /* GET one Trail */
+router.get('/FindTrail/:id', function(req, res) {
   console.log(req.params.id );
-  ToDos.find({ _id: req.params.id }, (err, oneToDo) => {
+  Trails.find({ _id: req.params.id }, (err, oneTrail) => {
     if (err) {
       console.log(err);
       res.status(500).send(err);
     }
-    res.status(200).json(oneToDo);
+    res.status(200).json(oneTrail);
   });
 });
 
