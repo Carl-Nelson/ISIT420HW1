@@ -10,7 +10,7 @@ const Trails = require("../Trails");
 // edited to include my non-admin, user level account and PW on mongo atlas
 // and also to include the name of the mongo DB that the collection
 const dbURI =
- "your mongo connection string here";
+"mongodb+srv://bcUser:bcUser@cluster0.cy7eo.mongodb.net/TrailTrackerDB?retryWrites=true&w=majority";
 
 // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
 // by default, you need to set it to false.
