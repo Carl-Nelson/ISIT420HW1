@@ -18,14 +18,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var oneTrail = new Trail(tName, tLocation, tLength);
 
         $.ajax({
-            url: '/NewTrail' ,
+            url: '/NewTrail',
             method: 'POST',
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(oneTrail),
             success: function (result) {
                 console.log("added new trail")
-            }
+            },  
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+              }
 
         });
     });
@@ -71,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var tName = document.getElementById("mname").value;
         var tLocation = document.getElementById("mlocation").value;
         var tLength = document.getElementById("mlength").value;
-        var oneTrail = new ToDo(tName, tLocation, tLength);
+        var oneTrail = new Trail(tName, tLocation, tLength);
         oneTrail.completed =  document.getElementById("mcompleted").value;
         oneTrail.dateCompleted =  document.getElementById("mdatecompleted").value;
         

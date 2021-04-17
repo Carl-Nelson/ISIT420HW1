@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 // schema will enforce consistency in all our documents (records)
 const Schema = mongoose.Schema;
 
-const TrailsSchema = new Schema({
+const TrailSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -26,8 +26,8 @@ const TrailsSchema = new Schema({
   },
   dateCompleted: {
     type: String,
-    required: true
+    required: false
   }
 });
 
-module.exports = mongoose.model("Trails", TrailsSchema);
+module.exports = mongoose.model("Trails", TrailSchema);

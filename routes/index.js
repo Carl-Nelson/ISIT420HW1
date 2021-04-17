@@ -70,7 +70,7 @@ router.post('/NewTrail', function(req, res) {
 
 
 router.delete('/DeleteTrail/:id', function (req, res) {
-  Trails.deleteOne({ _id: req.params.id }, (err, note) => { 
+  Trails.deleteOne({ _id: req.params.id }, (err, trail) => { 
     if (err) {
       res.status(404).send(err);
     }
