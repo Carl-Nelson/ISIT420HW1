@@ -3,7 +3,7 @@ function Trail(pName, pLocation, pLength) {
     this.name= pName;
     this.location = pLocation;
     this.length = pLength;
-    this.completed = pfalse;
+    this.completed = false;
     this.dateCompleted = "";
   }
   var ClientNotes = [];  // our local copy of the cloud data
